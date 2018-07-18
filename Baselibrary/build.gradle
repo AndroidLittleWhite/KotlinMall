@@ -55,6 +55,7 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
 
     //rxLifecycle
+    compile "com.trello.rxlifecycle2:rxlifecycle:$rx_lifecycle_version"
     compile "com.trello.rxlifecycle2:rxlifecycle-kotlin:$rx_lifecycle_version"
     compile "com.trello.rxlifecycle2:rxlifecycle-components:$rx_lifecycle_version"
 
