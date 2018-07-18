@@ -3,7 +3,9 @@
     package="com.yking.usercenter">
 
     <uses-permission android:name="android.permission.INTERNET"/>
-    <application android:theme="@style/AppTheme">
+    <application
+        android:name="com.yking.baselibrary.common.BaseApplication"
+        android:theme="@style/AppTheme">
         <activity android:name=".ui.activity.RegisterActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

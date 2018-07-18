@@ -1,6 +1,7 @@
 package com.yking.usercenter.ui.activity
 
 import android.os.Bundle
+import com.yking.baselibrary.injection.component.ActivityComponent
 import com.yking.baselibrary.ui.activity.BaseMvpActivity
 import com.yking.usercenter.R
 import com.yking.usercenter.injection.component.DaggerUserComponet
@@ -22,7 +23,7 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView {
     }
 
     private fun initInjection() {
-        DaggerUserComponet.builder().userModule(UserModule()).build().inject(this)
+        DaggerUserComponet.builder().activityComponent(activityComponent).userModule(UserModule()).build().inject(this)
         mPresenter.mView = this
     }
 
