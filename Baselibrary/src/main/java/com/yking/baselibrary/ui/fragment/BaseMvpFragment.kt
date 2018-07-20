@@ -1,4 +1,4 @@
-package com.yking.baselibrary.ui.activity
+package com.yking.baselibrary.ui.fragment
 
 import android.os.Bundle
 import com.yking.baselibrary.common.BaseApplication
@@ -13,7 +13,7 @@ import javax.inject.Inject
 /**
  * @author Mr_YKing on 2018/7/17.
  */
-open abstract class BaseMvpActivity<T:BasePresenter<*>>:BaseActivity(),BaseView {
+open abstract class BaseMvpFragment<T: BasePresenter<*>>: BaseFragment(), BaseView {
     override fun showLoading() {
     }
 
@@ -26,7 +26,7 @@ open abstract class BaseMvpActivity<T:BasePresenter<*>>:BaseActivity(),BaseView 
     @Inject
     lateinit var mPresenter:T
 
-    lateinit var activityComponent:ActivityComponent
+    lateinit var activityComponent: ActivityComponent
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,8 +39,8 @@ open abstract class BaseMvpActivity<T:BasePresenter<*>>:BaseActivity(),BaseView 
 
     private fun initActivityInjection() {
         activityComponent= DaggerActivityComponent.builder()
-                .appComponent((application as BaseApplication).appComponent)
-                .activityModule(ActivityModule(this))
+                .appComponent((activity?.application as BaseApplication).appComponent)
+                .activityModule(ActivityModule(activity!!))
                 .lifecycleProviderModule(LifecycleProviderModule(this))
                 .build()
     }

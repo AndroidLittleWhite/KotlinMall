@@ -3,10 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 26
-
-
-
+    compileSdkVersion 27
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 26
@@ -16,29 +13,33 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }
-
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    buildToolsVersion '27.0.2'
 
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support:appcompat-v7:27.0.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
     // Anko Commons
     compile "org.jetbrains.anko:anko-commons:$anko_version"
+
     // Support-v4 (only Anko Commons)
     compile "org.jetbrains.anko:anko-support-v4-commons:$anko_version"
+
     // Appcompat-v7 (only Anko Commons)
     compile "org.jetbrains.anko:anko-appcompat-v7-commons:$anko_version"
+
     //RxKotlin and RxAndroid
     compile "io.reactivex:rxkotlin:$rx_kotlin_version"
     compile "io.reactivex:rxandroid:${rx_android_version}"
@@ -54,10 +55,11 @@ dependencies {
     compile "com.google.dagger:dagger:$dagger_version"
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
 
-    //rxLifecycle
-    compile "com.trello.rxlifecycle2:rxlifecycle:$rx_lifecycle_version"
-    compile "com.trello.rxlifecycle2:rxlifecycle-kotlin:$rx_lifecycle_version"
-    compile "com.trello.rxlifecycle2:rxlifecycle-components:$rx_lifecycle_version"
+    //RxLifecycle
+    compile "com.trello:rxlifecycle-kotlin:$rx_lifecycle_version"
+    compile "com.trello:rxlifecycle-components:$rx_lifecycle_version"
+//    compile 'com.trello.rxlifecycle2:rxlifecycle-kotlin:2.1.0'
+//    compile 'com.trello.rxlifecycle2:rxlifecycle-android-lifecycle-kotlin:2.1.0'
 
 }
 repositories {

@@ -10,19 +10,20 @@ import javax.inject.Inject
 /**
  * @author Mr_YKing on 2018/7/18.
  */
-class RegisterPresenter @Inject constructor():BasePresenter<RegisterView>(){
+class RegisterPresenter @Inject constructor() : BasePresenter<RegisterView>() {
     @Inject
-    lateinit var userService:UserService
-    fun register(name:String ,verifyCode: String,pwd: String){
+    lateinit var userService: UserService
+
+    fun register(name: String, verifyCode: String, pwd: String) {
         /**
          * 业务逻辑
          */
-
-        userService.register(name,pwd,verifyCode)
-                .execute(object :BaseSubscribe<Boolean>(){
+        userService.register(name, pwd, verifyCode)
+                .execute(object : BaseSubscribe<Boolean>() {
                     override fun onNext(t: Boolean) {
-                        mView.onRegisterSuccess()
+                        if (t)
+                            mView.onRegisterSuccess("注册成功")
                     }
-                })
+                }, lifecycleProvider)
     }
 }
