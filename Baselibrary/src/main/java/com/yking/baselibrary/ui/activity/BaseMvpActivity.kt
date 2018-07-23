@@ -8,30 +8,26 @@ import com.yking.baselibrary.injection.module.ActivityModule
 import com.yking.baselibrary.injection.module.LifecycleProviderModule
 import com.yking.baselibrary.presenter.BasePresenter
 import com.yking.baselibrary.presenter.view.BaseView
+import com.yking.baselibrary.widgets.ProgressLoading
 import javax.inject.Inject
 
 /**
  * @author Mr_YKing on 2018/7/17.
  */
 open abstract class BaseMvpActivity<T:BasePresenter<*>>:BaseActivity(),BaseView {
-    override fun showLoading() {
-    }
 
-    override fun hideLoading() {
-    }
-
-    override fun onError() {
-    }
 
     @Inject
     lateinit var mPresenter:T
 
     lateinit var activityComponent:ActivityComponent
 
+    private lateinit var progressLoading:ProgressLoading
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initActivityInjection()
-
+        progressLoading= ProgressLoading.create(this)
         injectComponent()
     }
 
@@ -43,5 +39,15 @@ open abstract class BaseMvpActivity<T:BasePresenter<*>>:BaseActivity(),BaseView 
                 .activityModule(ActivityModule(this))
                 .lifecycleProviderModule(LifecycleProviderModule(this))
                 .build()
+    }
+    override fun showLoading() {
+        progressLoading.showLoading()
+    }
+
+    override fun hideLoading() {
+        progressLoading.hideLoading()
+    }
+
+    override fun onError() {
     }
 }
