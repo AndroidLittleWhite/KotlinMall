@@ -6,6 +6,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.activity.RegisterActivity">
+    <com.yking.baselibrary.widgets.HeaderBar
+        style="@style/MatchWrap"
+        app:isShowBack="true"
+        app:titleText="登录"
+        app:rightText="注册"/>
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
