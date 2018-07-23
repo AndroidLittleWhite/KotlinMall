@@ -9,6 +9,7 @@ import com.yking.baselibrary.injection.module.LifecycleProviderModule
 import com.yking.baselibrary.presenter.BasePresenter
 import com.yking.baselibrary.presenter.view.BaseView
 import com.yking.baselibrary.widgets.ProgressLoading
+import org.jetbrains.anko.toast
 import javax.inject.Inject
 
 /**
@@ -48,6 +49,7 @@ open abstract class BaseMvpActivity<T:BasePresenter<*>>:BaseActivity(),BaseView 
         progressLoading.hideLoading()
     }
 
-    override fun onError() {
+    override fun onError(text:String) {
+        toast(text)
     }
 }

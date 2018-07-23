@@ -8,6 +8,7 @@ import com.yking.baselibrary.injection.module.ActivityModule
 import com.yking.baselibrary.injection.module.LifecycleProviderModule
 import com.yking.baselibrary.presenter.BasePresenter
 import com.yking.baselibrary.presenter.view.BaseView
+import org.jetbrains.anko.support.v4.toast
 import javax.inject.Inject
 
 /**
@@ -20,7 +21,8 @@ open abstract class BaseMvpFragment<T: BasePresenter<*>>: BaseFragment(), BaseVi
     override fun hideLoading() {
     }
 
-    override fun onError() {
+    override fun onError(text:String) {
+        toast(text)
     }
 
     @Inject

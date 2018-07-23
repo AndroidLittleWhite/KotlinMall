@@ -19,7 +19,6 @@ class RegisterPresenter @Inject constructor() : BasePresenter<RegisterView>() {
          * 业务逻辑
          */
         if (!checkNetWork()) {
-            println("网络不可用")
             return
         }
         userService.register(name, pwd, verifyCode)
