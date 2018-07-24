@@ -3,7 +3,7 @@
               xmlns:app="http://schemas.android.com/apk/res-auto"
               xmlns:tools="http://schemas.android.com/tools"
               style="@style/MatchMatch.Vertical.Common"
-              tools:context=".ui.activity.RegisterActivity">
+              tools:context="com.kotlin.usercenter.ui.activity.RegisterActivity">
 
     <com.kotlin.base.widgets.HeaderBar
         android:id="@+id/mHeaderBar"

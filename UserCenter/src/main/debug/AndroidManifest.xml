@@ -16,6 +16,7 @@
         <activity android:name="com.kotlin.usercenter.ui.activity.RegisterActivity"/>
         <activity android:name="com.kotlin.usercenter.ui.activity.ForgetPwdActivity"/>
         <activity android:name="com.kotlin.usercenter.ui.activity.ResetPwdActivity"/>
+        <activity android:name="com.kotlin.usercenter.ui.activity.UserInfoActivity"/>
     </application>
 
 </manifest>
