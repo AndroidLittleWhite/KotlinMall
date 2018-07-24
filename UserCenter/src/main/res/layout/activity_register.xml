@@ -5,7 +5,7 @@
               style="@style/MatchMatch.Vertical.Common"
               tools:context=".ui.activity.RegisterActivity">
 
-    <com.yking.baselibrary.widgets.HeaderBar
+    <com.kotlin.base.widgets.HeaderBar
         android:id="@+id/mHeaderBar"
         style="@style/MatchWrap"
         app:titleText="注册"/>
