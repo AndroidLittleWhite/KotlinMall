@@ -27,4 +27,8 @@ class UserServiceImpl @Inject constructor(): UserService {
         return repository.forgetPwd(mobile,verifyCode)
                 .convertBoolean()
     }
+    override fun resetPwd(mobile: String, pwd: String): Observable<Boolean> {
+        return repository.resetPwd(mobile,pwd)
+                .convertBoolean()
+    }
 }
