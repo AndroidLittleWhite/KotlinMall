@@ -39,6 +39,7 @@ class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView, View.OnClick
         mLoginBtn.enable(mPwdEt,{isBtnEnable()})
 
         mLoginBtn.onClick(this)
+        mForgetPwdTv.onClick(this)
         mHeaderBar.getRightView().onClick(this)
     }
 
@@ -48,6 +49,9 @@ class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView, View.OnClick
             R.id.mRightTv->{ startActivity<RegisterActivity>()}
             R.id.mLoginBtn ->{
                 mPresenter.login(mMobileEt.text.toString(),mPwdEt.text.toString(),"")
+            }
+            R.id.mForgetPwdTv ->{
+                startActivity<ForgetPwdActivity>()
             }
         }
     }
