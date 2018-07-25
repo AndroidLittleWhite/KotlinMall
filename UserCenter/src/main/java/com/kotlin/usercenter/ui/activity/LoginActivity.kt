@@ -6,6 +6,7 @@ import com.kotlin.base.common.AppManager
 import com.kotlin.base.ext.enable
 import com.kotlin.base.ext.onClick
 import com.kotlin.base.ui.activity.BaseMvpActivity
+import com.kotlin.user.utils.UserPrefsUtils.putUserInfo
 import com.kotlin.usercenter.data.protocol.UserInfo
 import com.kotlin.usercenter.injection.component.DaggerUserComponet
 import com.kotlin.usercenter.injection.module.UserModule
@@ -62,6 +63,7 @@ class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView, View.OnClick
 
     override fun onLoginResult(user: UserInfo) {
         toast("登陆成功")
+        putUserInfo(user)
         startActivity<UserInfoActivity>()
     }
 
