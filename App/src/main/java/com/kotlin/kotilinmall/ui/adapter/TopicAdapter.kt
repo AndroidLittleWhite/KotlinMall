@@ -5,7 +5,7 @@ import android.support.v4.view.PagerAdapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.kotlin.base.utils.GlideUtils
+import com.kotlin.base.ext.loadUrl
 import com.kotlin.kotilinmall.R
 import kotlinx.android.synthetic.main.layout_topic_item.view.*
 
@@ -24,8 +24,7 @@ class TopicAdapter(private val context: Context, private val list: List<String>)
 
     override fun instantiateItem(parent: ViewGroup, position: Int): Any {
         val rooView = LayoutInflater.from(this.context).inflate(R.layout.layout_topic_item, null)
-//        rooView.mTopicIv.loadUrl(list[position])
-        GlideUtils.loadUrlImage(context,list[position],rooView.mTopicIv)
+        rooView.mTopicIv.loadUrl(list[position])
         parent.addView(rooView)
         return rooView
     }
