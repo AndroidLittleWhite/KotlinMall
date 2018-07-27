@@ -64,7 +64,7 @@ class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView, View.OnClick
     override fun onLoginResult(user: UserInfo) {
         toast("登陆成功")
         putUserInfo(user)
-        startActivity<UserInfoActivity>()
+       finish()
     }
 
     override fun onBackPressed() {
