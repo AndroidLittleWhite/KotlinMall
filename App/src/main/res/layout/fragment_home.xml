@@ -26,26 +26,26 @@
     android:layout_marginTop="@dimen/common_margin_small"
     android:layout_marginRight="@dimen/common_margin_middle"
     android:layout_marginBottom="@dimen/common_margin_small"/>
-    <!--<TextView-->
-            <!--android:textSize="@dimen/text_small_size"-->
-            <!--android:textStyle="bold"-->
-            <!--android:textColor="@color/text_light_dark"-->
-            <!--android:background="@color/common_white"-->
-            <!--android:paddingLeft="@dimen/common_margin"-->
-            <!--android:paddingTop="@dimen/common_padding_small"-->
-            <!--android:paddingBottom="@dimen/common_margin_small"-->
-            <!--style="@style/MatchWrap"-->
-            <!--android:text="火爆进行中"-->
-            <!--android:drawableLeft="@drawable/icon_special"-->
-            <!--android:drawablePadding="@dimen/common_padding_small"/>-->
-    <!--<android.support.v7.widget.RecyclerView-->
-            <!--android:id="@+id/mHomeDiscountRv"-->
-            <!--style="@style/commonRecyclerView"-->
-            <!--android:background="@color/common_white"-->
-            <!--android:paddingLeft="@dimen/common_padding"-->
-            <!--android:paddingRight="@dimen/common_padding"-->
-            <!--android:paddingBottom="@dimen/common_padding_small"-->
-            <!--android:layout_height="wrap_content"/>-->
+    <TextView
+            android:textSize="@dimen/text_small_size"
+            android:textStyle="bold"
+            android:textColor="@color/text_light_dark"
+            android:background="@color/common_white"
+            android:paddingLeft="@dimen/common_margin"
+            android:paddingTop="@dimen/common_padding_small"
+            android:paddingBottom="@dimen/common_margin_small"
+            style="@style/MatchWrap"
+            android:text="火爆进行中"
+            android:drawableLeft="@drawable/icon_special"
+            android:drawablePadding="@dimen/common_padding_small"/>
+    <android.support.v7.widget.RecyclerView
+            android:id="@+id/mHomeDiscountRv"
+            style="@style/commonRecyclerView"
+            android:background="@color/common_white"
+            android:paddingLeft="@dimen/common_padding"
+            android:paddingRight="@dimen/common_padding"
+            android:paddingBottom="@dimen/common_padding_small"
+            android:layout_height="wrap_content"/>
     <!--<me.crosswall.lib.coverflow.core.PagerContainer-->
             <!--android:id="@+id/mTopicContainer"-->
             <!--style="@style/MatchMatch"-->
