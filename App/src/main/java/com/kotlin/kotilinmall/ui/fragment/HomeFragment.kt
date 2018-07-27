@@ -11,9 +11,13 @@ import com.kotlin.base.widgets.BannerImageLoader
 import com.kotlin.kotilinmall.R
 import com.kotlin.mall.common.*
 import com.kotlin.mall.ui.adapter.HomeDiscountAdapter
+import com.kotlin.mall.ui.adapter.TopicAdapter
 import com.youth.banner.BannerConfig
 import com.youth.banner.Transformer
 import kotlinx.android.synthetic.main.fragment_home.*
+import me.crosswall.lib.coverflow.CoverFlow
+
+
 
 
 /**
@@ -29,6 +33,7 @@ class HomeFragment: BaseFragment() {
         initBanner()
         initNews()
         initDiscount()
+        initTopic()
     }
 
     private fun initBanner() {
@@ -54,10 +59,24 @@ class HomeFragment: BaseFragment() {
     private fun initNews() {
         mNewsFlipperView.setData(arrayOf("新用户注册立减500","清爽夏日，一起来学kotlin吧"))
     }
+
     private fun initDiscount() {
         val discountAdapter=HomeDiscountAdapter(context!!)
         mHomeDiscountRv.layoutManager=LinearLayoutManager(context,RecyclerView.HORIZONTAL,false)
         mHomeDiscountRv.adapter=discountAdapter
         discountAdapter.setData(mutableListOf(HOME_DISCOUNT_ONE, HOME_DISCOUNT_TWO, HOME_DISCOUNT_THREE, HOME_DISCOUNT_FOUR, HOME_DISCOUNT_FIVE))
+    }
+    private fun initTopic() {
+        mTopicPager.adapter=TopicAdapter(context!!, listOf(HOME_TOPIC_ONE, HOME_TOPIC_TWO, HOME_TOPIC_THREE, HOME_TOPIC_FOUR, HOME_TOPIC_FIVE))
+        mTopicPager.currentItem=1
+        mTopicPager.offscreenPageLimit=5
+
+        CoverFlow.Builder()
+                .with(mTopicPager)
+                .pagerMargin(0f)
+                .scale(0.3f)
+                .spaceSize(0f)
+                .rotationY(0f)
+                .build()
     }
 }
