@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import com.ashokvarma.bottomnavigation.BottomNavigationBar
+import com.kotlin.goods.ui.fragment.CategoryFragment
 import com.kotlin.kotilinmall.R
 import com.kotlin.kotilinmall.ui.fragment.HomeFragment
 import com.kotlin.kotilinmall.ui.fragment.MeFragment
@@ -14,7 +15,7 @@ class MainActivity : AppCompatActivity() {
 
     private val mStack=Stack<Fragment>()
     private val mHomeFragment:HomeFragment by lazy { HomeFragment() }
-    private val mCategoryFragment:HomeFragment by lazy { HomeFragment() }
+    private val mCategoryFragment:CategoryFragment by lazy { CategoryFragment() }
     private val mCartFragment:HomeFragment by lazy { HomeFragment() }
     private val mMsgFragment:HomeFragment by lazy { HomeFragment() }
     private val mMeFragment:MeFragment by lazy { MeFragment() }
