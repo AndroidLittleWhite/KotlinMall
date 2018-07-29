@@ -2,9 +2,14 @@ package com.kotlin.goods.ui.activity
 
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.LinearLayoutManager
+import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder
+import cn.bingoogolapple.refreshlayout.BGARefreshLayout
+import cn.bingoogolapple.refreshlayout.BGARefreshViewHolder
 import com.kennyc.view.MultiStateView
 import com.kotlin.base.ui.activity.BaseMvpActivity
 import com.kotlin.goods.R
+import com.kotlin.goods.common.GoodsConstant.Companion.KEY_CATEGORY_ID
 import com.kotlin.goods.data.protocol.Goods
 import com.kotlin.goods.injection.component.DaggerGoodsComponet
 import com.kotlin.goods.injection.module.GoodsModule
@@ -16,7 +21,11 @@ import kotlinx.android.synthetic.main.activity_goods.*
 /**
  * Created by  on 2018/7/27.YaoKai
  */
-class GoodsActivity : BaseMvpActivity<GoodsListPresenter>(), GoodsListView {
+class GoodsActivity : BaseMvpActivity<GoodsListPresenter>(), GoodsListView, BGARefreshLayout.BGARefreshLayoutDelegate {
+
+    private var mCurrnetPage:Int=1
+    private var mMaxPage:Int=1
+
     private lateinit var mGoodsAdapter: GoodsAdapter
     override fun injectComponent() {
         DaggerGoodsComponet.builder().activityComponent(activityComponent).goodsModule(GoodsModule()).build().inject(this)
@@ -28,6 +37,7 @@ class GoodsActivity : BaseMvpActivity<GoodsListPresenter>(), GoodsListView {
         setContentView(R.layout.activity_goods)
 
         initView()
+        initRefreshLayout()
         loadData()
     }
 
@@ -37,18 +47,54 @@ class GoodsActivity : BaseMvpActivity<GoodsListPresenter>(), GoodsListView {
         mGoodsRv.adapter = mGoodsAdapter
     }
 
+    private fun initRefreshLayout() {
+        // 为BGARefreshLayout 设置代理
+        mRefreshLayout.setDelegate(this);
+        // 设置下拉刷新和上拉加载更多的风格     参数1：应用程序上下文，参数2：是否具有上拉加载更多功能
+        val refreshViewHolder =  BGANormalRefreshViewHolder(this, true)
+        // 设置下拉刷新和上拉加载更多的风格
+        mRefreshLayout.setRefreshViewHolder(refreshViewHolder)
+        // 设置整个加载更多控件的背景颜色资源 id
+        refreshViewHolder.setLoadMoreBackgroundColorRes(R.color.common_bg)
+        // 设置下拉刷新控件的背景颜色资源 id
+        refreshViewHolder.setRefreshViewBackgroundColorRes(R.color.common_bg)
+    }
+
     private fun loadData() {
 
-        mPresenter.getGoodsList(intent.getIntExtra("categoryId", 0), 1)
+        mPresenter.getGoodsList(intent.getIntExtra(KEY_CATEGORY_ID, 0), mCurrnetPage)
 
     }
 
     override fun onGetGoodsListResult(mutableList: MutableList<Goods>?) {
+        mRefreshLayout.endLoadingMore()
+        mRefreshLayout.endRefreshing()
         if (mutableList != null && mutableList.size > 0) {
-            mGoodsAdapter.setData(mutableList)
+            mMaxPage=mutableList[0].maxPage
+            if (mCurrnetPage==1){
+                mGoodsAdapter.setData(mutableList)
+            }else{
+                mGoodsAdapter.dataList.addAll(mutableList)
+                mGoodsAdapter.notifyDataSetChanged()
+            }
             mMultiStateView.viewState = MultiStateView.VIEW_STATE_CONTENT
         } else {
             mMultiStateView.viewState = MultiStateView.VIEW_STATE_EMPTY
         }
+    }
+
+    override fun onBGARefreshLayoutBeginLoadingMore(refreshLayout: BGARefreshLayout?): Boolean {
+        return if (mCurrnetPage<mMaxPage){
+            mCurrnetPage++
+            loadData()
+            true
+        }else{
+            false
+        }
+    }
+
+    override fun onBGARefreshLayoutBeginRefreshing(refreshLayout: BGARefreshLayout?) {
+        mCurrnetPage=1
+        loadData()
     }
 }
