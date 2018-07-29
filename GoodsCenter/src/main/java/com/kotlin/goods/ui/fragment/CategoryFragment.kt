@@ -67,7 +67,9 @@ class CategoryFragment:BaseMvpFragment<CategroyPresenter>(),CategroyView {
         mSecondCategoryRv.adapter=mSecondCategroyAdapter
         mSecondCategroyAdapter.setOnItemClickListener(object : BaseRecyclerViewAdapter.OnItemClickListener<Category> {
             override fun onItemClick(item: Category, position: Int) {
+
                 startActivity<GoodsActivity>("categoryId" to item.id)
+
             }
         })
     }

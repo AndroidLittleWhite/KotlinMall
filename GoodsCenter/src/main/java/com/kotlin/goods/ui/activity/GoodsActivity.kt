@@ -38,7 +38,9 @@ class GoodsActivity : BaseMvpActivity<GoodsListPresenter>(), GoodsListView {
     }
 
     private fun loadData() {
+
         mPresenter.getGoodsList(intent.getIntExtra("categoryId", 0), 1)
+
     }
 
     override fun onGetGoodsListResult(mutableList: MutableList<Goods>?) {
