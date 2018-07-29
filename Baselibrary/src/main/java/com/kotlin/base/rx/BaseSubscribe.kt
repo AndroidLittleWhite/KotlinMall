@@ -14,6 +14,8 @@ open class BaseSubscribe<T>(val baseView:BaseView):Subscriber<T>() {
         baseView.hideLoading()
         if (e is BaseException) {
             baseView.onError(e.msg)
+        }else{
+            e!!.printStackTrace()
         }
     }
     override fun onCompleted() {
