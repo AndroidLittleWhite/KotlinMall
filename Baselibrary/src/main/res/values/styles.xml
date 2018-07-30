@@ -102,4 +102,26 @@
         <item name="msv_errorView">@layout/layout_state_error</item>
         <item name="msv_viewState">loading</item>
     </style>
+
+    <!-- TabLayout通用样式-->
+    <style name="TabsStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="tabIndicatorColor">@color/common_white</item>
+        <item name="tabBackground">@drawable/tab_selector</item>
+        <item name="tabTextAppearance">@style/TabLayoutTextStyle</item>
+        <item name="tabTextColor">@color/text_light_dark</item>
+        <item name="tabSelectedTextColor">@color/common_white</item>
+    </style>
+
+    <!-- TabLayout文字样式-->
+    <style name="TabLayoutTextStyle">
+        <item name="android:textSize">@dimen/text_big_size</item>
+    </style>
+
+    <!-- 底部出入动画 -->
+    <style name="AnimBottom" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/push_bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/push_bottom_out</item>
+    </style>
 </resources>
