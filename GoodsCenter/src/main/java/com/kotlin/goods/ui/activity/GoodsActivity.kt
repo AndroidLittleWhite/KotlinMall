@@ -2,14 +2,15 @@ package com.kotlin.goods.ui.activity
 
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
 import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout
-import cn.bingoogolapple.refreshlayout.BGARefreshViewHolder
 import com.kennyc.view.MultiStateView
+import com.kotlin.base.ext.loading
 import com.kotlin.base.ui.activity.BaseMvpActivity
 import com.kotlin.goods.R
-import com.kotlin.goods.common.GoodsConstant.Companion.KEY_CATEGORY_ID
+import com.kotlin.goods.common.GoodsConstant
+import com.kotlin.goods.common.GoodsConstant.Companion.KEY_GOODS_KEYWORD
+import com.kotlin.goods.common.GoodsConstant.Companion.KEY_SEARCH_GOODS_TYPE
 import com.kotlin.goods.data.protocol.Goods
 import com.kotlin.goods.injection.component.DaggerGoodsComponet
 import com.kotlin.goods.injection.module.GoodsModule
@@ -61,9 +62,12 @@ class GoodsActivity : BaseMvpActivity<GoodsListPresenter>(), GoodsListView, BGAR
     }
 
     private fun loadData() {
-
-        mPresenter.getGoodsList(intent.getIntExtra(KEY_CATEGORY_ID, 0), mCurrnetPage)
-
+        mMultiStateView.loading()
+        if (intent.getIntExtra(KEY_SEARCH_GOODS_TYPE,0)!=0){
+            mPresenter.getGoodsListByKeyword(intent.getStringExtra(KEY_GOODS_KEYWORD),mCurrnetPage)
+        }else{
+            mPresenter.getGoodsList(intent.getIntExtra(GoodsConstant.KEY_CATEGORY_ID, 0), mCurrnetPage)
+        }
     }
 
     override fun onGetGoodsListResult(mutableList: MutableList<Goods>?) {
