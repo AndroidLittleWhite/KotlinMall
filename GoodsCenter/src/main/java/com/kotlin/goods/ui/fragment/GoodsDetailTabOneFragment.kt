@@ -5,7 +5,10 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.ScaleAnimation
 import com.eightbitlab.rxbus.Bus
+import com.eightbitlab.rxbus.registerInBus
 import com.kotlin.base.ext.onClick
 import com.kotlin.base.ui.activity.BaseActivity
 import com.kotlin.base.ui.fragment.BaseMvpFragment
@@ -15,6 +18,7 @@ import com.kotlin.goods.R
 import com.kotlin.goods.common.GoodsConstant
 import com.kotlin.goods.data.protocol.Goods
 import com.kotlin.goods.event.GoodsDetailImageEvent
+import com.kotlin.goods.event.SkuChangedEvent
 import com.kotlin.goods.injection.component.DaggerGoodsComponet
 import com.kotlin.goods.injection.module.GoodsModule
 import com.kotlin.goods.presenter.GoodsDeatilPresenter
@@ -30,6 +34,9 @@ import kotlinx.android.synthetic.main.fragment_goods_detail_tab_one.*
 class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDeatilPresenter>(),GoodsDetailView{
 
     private lateinit var mSkuPop:GoodsSkuPopView
+
+    private lateinit var mStartAnimation:ScaleAnimation
+    private lateinit var mEndAnimation:ScaleAnimation
     override fun injectComponent() {
         DaggerGoodsComponet.builder().activityComponent(activityComponent).goodsModule(GoodsModule()).build().inject(this)
         mPresenter.mView = this
@@ -43,7 +50,9 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDeatilPresenter>(),GoodsD
         super.onViewCreated(view, savedInstanceState)
         initBanner()
         initView()
+        initAnimation()
         loadData()
+        initObserve()
     }
 
     private fun initBanner() {
@@ -64,17 +73,43 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDeatilPresenter>(),GoodsD
 
     private fun initView() {
         mSkuPop= GoodsSkuPopView(activity!!)
-
+        mSkuPop.setOnDismissListener {
+            (activity as BaseActivity).contentView.startAnimation(mEndAnimation)
+        }
         mSkuView.onClick {
             mSkuPop.showAtLocation((activity as BaseActivity).contentView,Gravity.BOTTOM and Gravity.CENTER_HORIZONTAL,0,0)
+            (activity as BaseActivity).contentView.startAnimation(mStartAnimation)
         }
 
     }
 
+    private fun initAnimation(){
+        mStartAnimation= ScaleAnimation(1.0f,0.95f,1.0f,0.95f,
+                Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,0.5F)
+        mStartAnimation.duration=500
+        mStartAnimation.fillAfter=true
+
+        mEndAnimation= ScaleAnimation(0.95f,1.0f,0.95f,1.0f,
+                Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,0.5F)
+        mEndAnimation.duration=500
+        mEndAnimation.fillAfter=true
+
+    }
     private fun loadData() {
         mPresenter.getGoodsDEtail(activity!!.intent.getIntExtra(GoodsConstant.KEY_GOODS_ID,-1))
     }
 
+    private fun initObserve() {
+        Bus.observe<SkuChangedEvent>()
+                .subscribe {
+                    t: SkuChangedEvent ->
+                    run {
+                        mSkuSelectedTv.text=mSkuPop.getSelectSku()+GoodsConstant.SKU_SEPARATOR+mSkuPop.getSelectCount()+"件"
+                    }
+                }
+                .registerInBus(this)
+
+    }
     override fun onGetGoodsDetailResult(goods: Goods) {
         mGoodsDetailBanner.setImages(goods.goodsBanner.split(","))
         mGoodsDetailBanner.start()
@@ -94,5 +129,9 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDeatilPresenter>(),GoodsD
         mSkuPop.setGoodsIcon(goods.goodsDefaultIcon)
         mSkuPop.setGoodsPrice(goods.goodsDefaultPrice)
         mSkuPop.setSkuData(goods.goodsSku)
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        Bus.unregister(this)
     }
 }
