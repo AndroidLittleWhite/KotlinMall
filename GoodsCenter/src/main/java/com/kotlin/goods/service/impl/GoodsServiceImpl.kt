@@ -10,16 +10,20 @@ import javax.inject.Inject
 /**
  * Created by  on 2018/7/18.YaoKai
  */
-class GoodsServiceImpl @Inject constructor(): GoodsService {
-
+class GoodsServiceImpl @Inject constructor() : GoodsService {
 
     @Inject
     lateinit var repository: GoodsRepository
 
     override fun getGoodsList(categoryId: Int, pageNum: Int): Observable<MutableList<Goods>?> {
-        return  repository.getGoodsList(categoryId,pageNum).convert()
+        return repository.getGoodsList(categoryId, pageNum).convert()
     }
+
     override fun getGoodsListByKeyword(keyWord: String, pageNum: Int): Observable<MutableList<Goods>?> {
-        return  repository.getGoodsListByKeyword(keyWord,pageNum).convert()
+        return repository.getGoodsListByKeyword(keyWord, pageNum).convert()
+    }
+
+    override fun getGoodsDetail(goodsId: Int): Observable<Goods> {
+        return repository.getGoodsDetail(goodsId).convert()
     }
 }
