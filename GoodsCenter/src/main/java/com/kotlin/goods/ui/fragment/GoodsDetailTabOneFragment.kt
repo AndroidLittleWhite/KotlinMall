@@ -1,6 +1,7 @@
 package com.kotlin.goods.ui.fragment
 
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -65,7 +66,7 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDeatilPresenter>(),GoodsD
         mSkuPop= GoodsSkuPopView(activity!!)
 
         mSkuView.onClick {
-            mSkuPop.showAsDropDown((activity as BaseActivity).contentView)
+            mSkuPop.showAtLocation((activity as BaseActivity).contentView,Gravity.BOTTOM and Gravity.CENTER_HORIZONTAL,0,0)
         }
 
     }
@@ -74,7 +75,7 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDeatilPresenter>(),GoodsD
         mPresenter.getGoodsDEtail(activity!!.intent.getIntExtra(GoodsConstant.KEY_GOODS_ID,-1))
     }
 
-    override fun onGetGoodsDEtailResult(goods: Goods) {
+    override fun onGetGoodsDetailResult(goods: Goods) {
         mGoodsDetailBanner.setImages(goods.goodsBanner.split(","))
         mGoodsDetailBanner.start()
 
@@ -92,5 +93,6 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDeatilPresenter>(),GoodsD
         mSkuPop.setGoodsCode(goods.goodsCode)
         mSkuPop.setGoodsIcon(goods.goodsDefaultIcon)
         mSkuPop.setGoodsPrice(goods.goodsDefaultPrice)
+        mSkuPop.setSkuData(goods.goodsSku)
     }
 }

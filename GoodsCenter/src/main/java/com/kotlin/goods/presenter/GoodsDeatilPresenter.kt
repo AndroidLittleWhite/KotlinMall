@@ -25,7 +25,7 @@ class GoodsDeatilPresenter @Inject constructor() : BasePresenter<GoodsDetailView
         goodService.getGoodsDetail(goodID)
                 .execute(object : BaseSubscribe<Goods>(mView) {
                     override fun onNext(t: Goods) {
-                            mView.onGetGoodsDEtailResult(t)
+                            mView.onGetGoodsDetailResult(t)
                     }
                 }, lifecycleProvider)
     }
