@@ -29,4 +29,18 @@ class GoodsListPresenter @Inject constructor() : BasePresenter<GoodsListView>() 
                     }
                 }, lifecycleProvider)
     }
+    fun getGoodsListByKeyword(keyWord:String,pageNum:Int) {
+        /**
+         * 业务逻辑
+         */
+        if (!checkNetWork()) {
+            return
+        }
+        goodService.getGoodsListByKeyword(keyWord,pageNum)
+                .execute(object : BaseSubscribe<MutableList<Goods>?>(mView) {
+                    override fun onNext(t: MutableList<Goods>?) {
+                            mView.onGetGoodsListResult(t)
+                    }
+                }, lifecycleProvider)
+    }
 }

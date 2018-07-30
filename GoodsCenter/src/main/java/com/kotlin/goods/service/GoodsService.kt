@@ -8,4 +8,5 @@ import rx.Observable
  */
 interface GoodsService {
     fun getGoodsList(categoryId:Int,pageNum:Int): Observable<MutableList<Goods>?>
+    fun getGoodsListByKeyword(keyWord: String, pageNum: Int): Observable<MutableList<Goods>?>
 }
