@@ -14,6 +14,7 @@ import javax.inject.Inject
 class CartServiceImpl @Inject constructor() : CartService {
 
 
+
     @Inject
     lateinit var repository: CartRepository
 
@@ -27,5 +28,9 @@ class CartServiceImpl @Inject constructor() : CartService {
 
     override fun deleteCartList(list: List<Int>): Observable<Boolean> {
         return repository.deleteCartList(list).convertBoolean()
+    }
+
+    override fun submitCart(list: MutableList<CartGoods>, totalPrice: Long): Observable<Int> {
+        return repository.submitCart(list,totalPrice).convert()
     }
 }

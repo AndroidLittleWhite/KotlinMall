@@ -69,13 +69,7 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
         }
 
         mHeaderBar.getRightView().onClick {
-            val isEditStatues=mHeaderBar.getRightView().text==resources.getText(R.string.common_edit)
-
-            mTotalPriceTv.setVisible(isEditStatues.not())
-            mSettleAccountsBtn.setVisible(!isEditStatues)
-            mDeleteBtn.setVisible(isEditStatues)
-
-            mHeaderBar.getRightView().text=if (isEditStatues) resources.getText(R.string.common_complete)else resources.getText(R.string.common_edit)
+            refreshStatues()
         }
 
         mDeleteBtn.onClick {
@@ -87,6 +81,26 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
                 mPresenter.deleteCartList(deleteList)
             }
         }
+
+        mSettleAccountsBtn.onClick {
+            val submitList= arrayListOf<CartGoods>()
+            mCartAdapter.dataList.filter { it.isSelected }.mapTo(submitList){it}
+            if (submitList.size==0){
+                toast("请选择要结算的商品")
+            }else{
+                mPresenter.submitCart(submitList,mTotalPrice)
+            }
+        }
+    }
+
+    private fun refreshStatues() {
+        val isEditStatues = mHeaderBar.getRightView().text == resources.getText(R.string.common_edit)
+
+        mTotalPriceTv.setVisible(isEditStatues.not())
+        mSettleAccountsBtn.setVisible(!isEditStatues)
+        mDeleteBtn.setVisible(isEditStatues)
+
+        mHeaderBar.getRightView().text = if (isEditStatues) resources.getText(R.string.common_complete) else resources.getText(R.string.common_edit)
     }
 
     private fun loadData() {
@@ -117,11 +131,13 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
     override fun onGetCartListResult(mutableList: MutableList<CartGoods>?) {
         if (mutableList != null && mutableList.size > 0) {
             mCartAdapter.setData(mutableList)
+            mHeaderBar.getRightView().setVisible(true)
             mMultiStateView.viewState = MultiStateView.VIEW_STATE_CONTENT
         } else {
-            mAllCheckedCb.isChecked=false
+            mHeaderBar.getRightView().setVisible(false)
             mMultiStateView.viewState = MultiStateView.VIEW_STATE_EMPTY
         }
+        mAllCheckedCb.isChecked=false
         updateCartSize(mutableList)
         updateTotalPrice()
     }
@@ -133,7 +149,16 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
         if (boolean){
             toast("删除成功")
             loadData()
+            refreshStatues()
         }
+    }
+    override fun onSubmitCartListResult(int: Int) {
+        toast("$int")
+    }
+
+    fun setBackVisible(isVisible:Boolean){
+        mHeaderBar.getLeftView().setVisible(isVisible)
+
     }
     override fun onDestroy() {
         super.onDestroy()
