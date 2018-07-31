@@ -52,6 +52,9 @@ class CartGoodsAdapter(context: Context) : BaseRecyclerViewAdapter<CartGoods, Ca
             model.isSelected = holder.itemView.mCheckedCb.isChecked
             val isAllChecked = dataList.all {it.isSelected }
             Bus.send(CartAllCheckedEvent(isAllChecked))
+//            val cartSize=dataList.map { it.goodsCount }.sum()
+//            AppPrefsUtils.putInt(GoodsConstant.SP_CART_SIZE,cartSize)
+//            Bus.send(UpdateCartSizeEvent())
             notifyDataSetChanged()
         }
 
