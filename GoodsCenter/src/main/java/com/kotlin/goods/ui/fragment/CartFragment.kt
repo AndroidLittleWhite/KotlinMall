@@ -11,9 +11,11 @@ import com.kennyc.view.MultiStateView
 import com.kotlin.base.ext.loading
 import com.kotlin.base.ext.onClick
 import com.kotlin.base.ui.fragment.BaseMvpFragment
+import com.kotlin.base.utils.YuanFenConverter
 import com.kotlin.goods.R
 import com.kotlin.goods.data.protocol.CartGoods
 import com.kotlin.goods.event.CartAllCheckedEvent
+import com.kotlin.goods.event.UpdateTotalPriceEvent
 import com.kotlin.goods.injection.component.DaggerCartComponet
 import com.kotlin.goods.injection.module.CartModule
 import com.kotlin.goods.presenter.CartListPresenter
@@ -27,6 +29,8 @@ import kotlinx.android.synthetic.main.fragment_cart.*
 class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
 
     private lateinit var mCartAdapter:CartGoodsAdapter
+
+    private var mTotalPrice:Long=0
 
     override fun injectComponent() {
         DaggerCartComponet.builder().activityComponent(activityComponent).cartModule(CartModule()).build().inject(this)
@@ -54,6 +58,7 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
                 item.isSelected=mAllCheckedCb.isChecked
             }
             mCartAdapter.notifyDataSetChanged()
+            updateTotalPrice()
         }
     }
 
@@ -66,7 +71,17 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
                 .subscribe {
                     t: CartAllCheckedEvent ->
                     run {
+                        updateTotalPrice()
                         mAllCheckedCb.isChecked=t.isAllChecked
+                    }
+                }
+                .registerInBus(this)
+
+        Bus.observe<UpdateTotalPriceEvent>()
+                .subscribe {
+                    t: UpdateTotalPriceEvent ->
+                    run {
+                        updateTotalPrice()
                     }
                 }
                 .registerInBus(this)
@@ -79,6 +94,10 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
         } else {
             mMultiStateView.viewState = MultiStateView.VIEW_STATE_EMPTY
         }
+    }
+    fun updateTotalPrice(){
+        mTotalPrice=mCartAdapter.dataList.filter { it.isSelected }.map { it.goodsPrice*it.goodsCount }.sum()
+        mTotalPriceTv.text="合计：${YuanFenConverter.changeF2YWithUnit(mTotalPrice)}"
     }
 
     override fun onDestroy() {
