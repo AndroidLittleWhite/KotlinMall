@@ -20,6 +20,7 @@ import com.kotlin.goods.data.protocol.Goods
 import com.kotlin.goods.event.AddCartEvent
 import com.kotlin.goods.event.GoodsDetailImageEvent
 import com.kotlin.goods.event.SkuChangedEvent
+import com.kotlin.goods.event.UpdateCartSizeEvent
 import com.kotlin.goods.injection.component.DaggerGoodsComponet
 import com.kotlin.goods.injection.module.GoodsModule
 import com.kotlin.goods.presenter.GoodsDeatilPresenter
@@ -28,7 +29,6 @@ import com.kotlin.goods.widget.GoodsSkuPopView
 import com.youth.banner.BannerConfig
 import com.youth.banner.Transformer
 import kotlinx.android.synthetic.main.fragment_goods_detail_tab_one.*
-import org.jetbrains.anko.support.v4.toast
 
 /*
     商品详情Tab One
@@ -137,7 +137,7 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDeatilPresenter>(),GoodsD
     }
 
     override fun onAddCartResult(result: Int) {
-        toast("cart---->$result")
+        Bus.send(UpdateCartSizeEvent())
     }
     override fun onGetGoodsDetailResult(goods: Goods) {
         mGoods=goods
