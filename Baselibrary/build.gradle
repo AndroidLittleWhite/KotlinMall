@@ -111,6 +111,9 @@ dependencies {
 
     //ARouter
     compile "com.alibaba:arouter-api:$arouter_api_version"
+
+    //badgeView
+    compile 'q.rorbin:badgeview:1.1.3'
 }
 repositories {
     mavenCentral()
