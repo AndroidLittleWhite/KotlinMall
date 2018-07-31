@@ -1,6 +1,7 @@
 package com.kotlin.provider.common
 
 import com.alibaba.android.arouter.launcher.ARouter
+import com.eightbitlab.rxbus.Bus
 import com.kotlin.base.common.BaseConstant
 import com.kotlin.base.utils.AppPrefsUtils
 import com.kotlin.provider.router.RouterPath
