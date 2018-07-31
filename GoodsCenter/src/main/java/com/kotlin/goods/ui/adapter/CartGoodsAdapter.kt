@@ -16,6 +16,7 @@ import com.kotlin.goods.data.protocol.CartGoods
 import com.kotlin.goods.event.CartAllCheckedEvent
 import com.kotlin.goods.event.UpdateTotalPriceEvent
 import com.kotlin.goods.getEditText
+import com.kotlin.goods.updateCartSize
 import kotlinx.android.synthetic.main.layout_cart_goods_item.view.*
 
 /*
@@ -52,9 +53,6 @@ class CartGoodsAdapter(context: Context) : BaseRecyclerViewAdapter<CartGoods, Ca
             model.isSelected = holder.itemView.mCheckedCb.isChecked
             val isAllChecked = dataList.all {it.isSelected }
             Bus.send(CartAllCheckedEvent(isAllChecked))
-//            val cartSize=dataList.map { it.goodsCount }.sum()
-//            AppPrefsUtils.putInt(GoodsConstant.SP_CART_SIZE,cartSize)
-//            Bus.send(UpdateCartSizeEvent())
             notifyDataSetChanged()
         }
 
@@ -63,6 +61,7 @@ class CartGoodsAdapter(context: Context) : BaseRecyclerViewAdapter<CartGoods, Ca
         holder.itemView.mGoodsCountBtn.getEditText().addTextChangedListener(object:DefaultTextWatcher(){
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 model.goodsCount = s.toString().toInt()
+                updateCartSize(dataList)
                 Bus.send(UpdateTotalPriceEvent())
             }
         })
