@@ -2,6 +2,7 @@ package com.kotlin.base.common
 
 import android.app.Application
 import android.content.Context
+import com.alibaba.android.arouter.launcher.ARouter
 import com.kotlin.base.injection.component.AppComponent
 import com.kotlin.base.injection.component.DaggerAppComponent
 import com.kotlin.base.injection.module.AppModule
@@ -17,6 +18,8 @@ class BaseApplication:Application() {
         initApplicationInjection()
 
         context=this
+
+        ARouter.init(this) // 尽可能早，推荐在Application中初始化
     }
 
     private fun initApplicationInjection() {

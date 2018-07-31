@@ -17,6 +17,7 @@ import com.kotlin.base.widgets.BannerImageLoader
 import com.kotlin.goods.R
 import com.kotlin.goods.common.GoodsConstant
 import com.kotlin.goods.data.protocol.Goods
+import com.kotlin.goods.event.AddCartEvent
 import com.kotlin.goods.event.GoodsDetailImageEvent
 import com.kotlin.goods.event.SkuChangedEvent
 import com.kotlin.goods.injection.component.DaggerGoodsComponet
@@ -27,16 +28,21 @@ import com.kotlin.goods.widget.GoodsSkuPopView
 import com.youth.banner.BannerConfig
 import com.youth.banner.Transformer
 import kotlinx.android.synthetic.main.fragment_goods_detail_tab_one.*
+import org.jetbrains.anko.support.v4.toast
 
 /*
     商品详情Tab One
  */
 class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDeatilPresenter>(),GoodsDetailView{
 
+
     private lateinit var mSkuPop:GoodsSkuPopView
 
     private lateinit var mStartAnimation:ScaleAnimation
     private lateinit var mEndAnimation:ScaleAnimation
+
+    private var mGoods:Goods?=null
+
     override fun injectComponent() {
         DaggerGoodsComponet.builder().activityComponent(activityComponent).goodsModule(GoodsModule()).build().inject(this)
         mPresenter.mView = this
@@ -108,9 +114,34 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDeatilPresenter>(),GoodsD
                     }
                 }
                 .registerInBus(this)
+        Bus.observe<AddCartEvent>()
+                .subscribe {
+                    t: AddCartEvent ->
+                    run {
+                        addCart()
+                    }
+                }
+                .registerInBus(this)
 
     }
+
+    private fun addCart() {
+        mGoods?.let {
+            mPresenter.addCart(it.id,
+                    it.goodsDesc,
+                    it.goodsDefaultIcon,
+                    it.goodsDefaultPrice,
+                    mSkuPop.getSelectCount(),
+                    mSkuPop.getSelectSku())
+        }
+    }
+
+    override fun onAddCartResult(result: Int) {
+        toast("cart---->$result")
+    }
     override fun onGetGoodsDetailResult(goods: Goods) {
+        mGoods=goods
+
         mGoodsDetailBanner.setImages(goods.goodsBanner.split(","))
         mGoodsDetailBanner.start()
 
