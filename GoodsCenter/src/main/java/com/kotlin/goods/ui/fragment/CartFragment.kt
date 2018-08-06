@@ -5,6 +5,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.alibaba.android.arouter.launcher.ARouter
 import com.eightbitlab.rxbus.Bus
 import com.eightbitlab.rxbus.registerInBus
 import com.kennyc.view.MultiStateView
@@ -23,6 +24,8 @@ import com.kotlin.goods.presenter.CartListPresenter
 import com.kotlin.goods.presenter.view.CartListView
 import com.kotlin.goods.ui.adapter.CartGoodsAdapter
 import com.kotlin.goods.updateCartSize
+import com.kotlin.provider.common.ProviderConstant.Companion.KEY_ORDER_ID
+import com.kotlin.provider.router.RouterPath
 import kotlinx.android.synthetic.main.fragment_cart.*
 import org.jetbrains.anko.support.v4.toast
 
@@ -153,7 +156,9 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
         }
     }
     override fun onSubmitCartListResult(int: Int) {
-        toast("$int")
+        ARouter.getInstance().build(RouterPath.OrderCenter.PATH_ORDER_CONFIRM)
+                .withInt(KEY_ORDER_ID,int)
+                .navigation()
     }
 
     fun setBackVisible(isVisible:Boolean){

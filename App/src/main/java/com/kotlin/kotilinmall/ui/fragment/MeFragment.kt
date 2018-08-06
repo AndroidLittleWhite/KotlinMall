@@ -10,6 +10,7 @@ import com.kotlin.base.ui.fragment.BaseFragment
 import com.kotlin.base.utils.AppPrefsUtils
 import com.kotlin.kotilinmall.R
 import com.kotlin.kotilinmall.ui.activity.SettingActivity
+import com.kotlin.order.ui.activity.ShipAddressActivity
 import com.kotlin.provider.common.ProviderConstant
 import com.kotlin.provider.common.isLogined
 import com.kotlin.usercenter.ui.activity.LoginActivity
@@ -37,6 +38,7 @@ class MeFragment : BaseFragment() ,View.OnClickListener{
         mUserIconIv.onClick(this)
         mUserNameTv.onClick(this)
         mSettingTv.onClick(this)
+        mAddressTv.onClick(this)
     }
     override fun onClick(view: View?) {
         when(view?.id){
@@ -46,6 +48,9 @@ class MeFragment : BaseFragment() ,View.OnClickListener{
                 }else{
                     startActivity<LoginActivity>()
                 }
+            }
+            R.id.mAddressTv->{
+                startActivity<ShipAddressActivity>()
             }
             R.id.mSettingTv->{
                 startActivity<SettingActivity>()
