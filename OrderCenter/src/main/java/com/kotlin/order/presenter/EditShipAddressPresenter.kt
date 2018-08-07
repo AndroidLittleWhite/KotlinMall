@@ -3,6 +3,7 @@ package com.kotlin.order.presenter
 import com.kotlin.base.ext.execute
 import com.kotlin.base.presenter.BasePresenter
 import com.kotlin.base.rx.BaseSubscribe
+import com.kotlin.order.data.protocol.ShipAddress
 import com.kotlin.order.presenter.view.EditShipAddressView
 import com.kotlin.order.service.ShipAddressService
 import javax.inject.Inject
@@ -25,6 +26,21 @@ class EditShipAddressPresenter @Inject constructor() : BasePresenter<EditShipAdd
                 .execute(object : BaseSubscribe<Boolean>(mView) {
                     override fun onNext(t: Boolean) {
                             mView.onAddAddressResult(t)
+                    }
+                }, lifecycleProvider)
+    }
+
+    fun editShipAddress(address: ShipAddress) {
+        /**
+         * 业务逻辑
+         */
+        if (!checkNetWork()) {
+            return
+        }
+        shipAddressService.editShipAddress(address)
+                .execute(object : BaseSubscribe<Boolean>(mView) {
+                    override fun onNext(t: Boolean) {
+                        mView.onSetDefaultShipAddressResult(t)
                     }
                 }, lifecycleProvider)
     }

@@ -7,4 +7,6 @@ import com.kotlin.base.presenter.view.BaseView
  */
 interface EditShipAddressView : BaseView {
     fun onAddAddressResult(result: Boolean)
+    fun onSetDefaultShipAddressResult(result:Boolean)
+
 }
