@@ -6,7 +6,6 @@ import com.kotlin.order.data.protocol.Order
 /**
  * @author Mr_YKing on 2018/7/18.
  */
-interface OrderConfirmView : BaseView {
+interface OrderDetailView : BaseView {
     fun onGetOrderByIdResult(result: Order)
-    fun onSubmitResult(result: Boolean)
 }

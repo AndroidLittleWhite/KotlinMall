@@ -13,8 +13,6 @@ import javax.inject.Inject
  */
 class ShipAddressServiceImpl @Inject constructor() : ShipAddressService {
 
-
-
     @Inject
     lateinit var repository: ShipAddressRepository
 
@@ -28,5 +26,8 @@ class ShipAddressServiceImpl @Inject constructor() : ShipAddressService {
 
     override fun editShipAddress(address: ShipAddress): Observable<Boolean> {
         return repository.editShipAddress(address).convertBoolean()
+    }
+    override fun deleteShipAddress(id: Int): Observable<Boolean> {
+        return repository.deleteShipAddress(id).convertBoolean()
     }
 }
