@@ -5,6 +5,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.alibaba.android.arouter.launcher.ARouter
 import com.bigkoo.alertview.AlertView
 import com.bigkoo.alertview.OnItemClickListener
 import com.kennyc.view.MultiStateView
@@ -22,6 +23,7 @@ import com.kotlin.order.presenter.view.OrderListView
 import com.kotlin.order.ui.activity.OrderDetailActivity
 import com.kotlin.order.ui.adapter.OrderAdapter
 import com.kotlin.provider.common.ProviderConstant
+import com.kotlin.provider.router.RouterPath
 import kotlinx.android.synthetic.main.fragment_order.*
 import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
@@ -43,11 +45,15 @@ class OrderFragment:BaseMvpFragment<OrderListPresenter>(),OrderListView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mMultiStateView.loading()
+
         initView()
-        loadData()
     }
 
+    override fun onStart() {
+        super.onStart()
+        mMultiStateView.loading()
+        loadData()
+    }
 
 
     private fun initView() {
@@ -62,7 +68,10 @@ class OrderFragment:BaseMvpFragment<OrderListPresenter>(),OrderListView {
                         mPresenter.confirmOrder(order.id)
                     }
                     OrderConstant.OPT_ORDER_PAY->{
-                        toast("支付")
+                        ARouter.getInstance().build(RouterPath.PaySDK.PATH_PAY)
+                                .withInt(ProviderConstant.KEY_ORDER_ID,order.id)
+                                .withLong(ProviderConstant.KEY_ORDER_PRICE,order.totalPrice)
+                                .navigation()
                     }
                     OrderConstant.OPT_ORDER_CANCEL->{
                         showCancelDidlog(order)
