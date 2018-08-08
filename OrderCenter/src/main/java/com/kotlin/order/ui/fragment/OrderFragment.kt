@@ -45,11 +45,15 @@ class OrderFragment:BaseMvpFragment<OrderListPresenter>(),OrderListView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mMultiStateView.loading()
+
         initView()
-        loadData()
     }
 
+    override fun onStart() {
+        super.onStart()
+        mMultiStateView.loading()
+        loadData()
+    }
 
 
     private fun initView() {
@@ -65,8 +69,8 @@ class OrderFragment:BaseMvpFragment<OrderListPresenter>(),OrderListView {
                     }
                     OrderConstant.OPT_ORDER_PAY->{
                         ARouter.getInstance().build(RouterPath.PaySDK.PATH_PAY)
-//                                .withInt(ProviderConstant.KEY_ORDER_ID,order.id)
-//                                .withLong(ProviderConstant.KEY_ORDER_PRICE,order.totalPrice)
+                                .withInt(ProviderConstant.KEY_ORDER_ID,order.id)
+                                .withLong(ProviderConstant.KEY_ORDER_PRICE,order.totalPrice)
                                 .navigation()
                     }
                     OrderConstant.OPT_ORDER_CANCEL->{
