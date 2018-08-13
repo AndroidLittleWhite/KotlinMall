@@ -3,15 +3,24 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/App/App.iml" filepath="$PROJECT_DIR$/App/App.iml" />
+      <module fileurl="file://D:\AndroidStudioWorkSpace\KotlinMall\App\App.iml" filepath="D:\AndroidStudioWorkSpace\KotlinMall\App\App.iml" />
       <module fileurl="file://$PROJECT_DIR$/Baselibrary/Baselibrary.iml" filepath="$PROJECT_DIR$/Baselibrary/Baselibrary.iml" />
+      <module fileurl="file://D:\AndroidStudioWorkSpace\KotlinMall\Baselibrary\Baselibrary.iml" filepath="D:\AndroidStudioWorkSpace\KotlinMall\Baselibrary\Baselibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/GoodsCenter/GoodsCenter.iml" filepath="$PROJECT_DIR$/GoodsCenter/GoodsCenter.iml" />
+      <module fileurl="file://D:\AndroidStudioWorkSpace\KotlinMall\GoodsCenter\GoodsCenter.iml" filepath="D:\AndroidStudioWorkSpace\KotlinMall\GoodsCenter\GoodsCenter.iml" />
       <module fileurl="file://$PROJECT_DIR$/KotlinMall.iml" filepath="$PROJECT_DIR$/KotlinMall.iml" />
       <module fileurl="file://D:\AndroidStudioWorkSpace\KotlinMall\.idea\modules\KotlinMall.iml" filepath="D:\AndroidStudioWorkSpace\KotlinMall\.idea\modules\KotlinMall.iml" />
+      <module fileurl="file://D:\AndroidStudioWorkSpace\KotlinMall\KotlinMall.iml" filepath="D:\AndroidStudioWorkSpace\KotlinMall\KotlinMall.iml" />
       <module fileurl="file://$PROJECT_DIR$/MessageCenter/MessageCenter.iml" filepath="$PROJECT_DIR$/MessageCenter/MessageCenter.iml" />
+      <module fileurl="file://D:\AndroidStudioWorkSpace\KotlinMall\MessageCenter\MessageCenter.iml" filepath="D:\AndroidStudioWorkSpace\KotlinMall\MessageCenter\MessageCenter.iml" />
       <module fileurl="file://$PROJECT_DIR$/OrderCenter/OrderCenter.iml" filepath="$PROJECT_DIR$/OrderCenter/OrderCenter.iml" />
+      <module fileurl="file://D:\AndroidStudioWorkSpace\KotlinMall\OrderCenter\OrderCenter.iml" filepath="D:\AndroidStudioWorkSpace\KotlinMall\OrderCenter\OrderCenter.iml" />
       <module fileurl="file://$PROJECT_DIR$/PaySDK/PaySDK.iml" filepath="$PROJECT_DIR$/PaySDK/PaySDK.iml" />
+      <module fileurl="file://D:\AndroidStudioWorkSpace\KotlinMall\PaySDK\PaySDK.iml" filepath="D:\AndroidStudioWorkSpace\KotlinMall\PaySDK\PaySDK.iml" />
       <module fileurl="file://$PROJECT_DIR$/Provider/Provider.iml" filepath="$PROJECT_DIR$/Provider/Provider.iml" />
+      <module fileurl="file://D:\AndroidStudioWorkSpace\KotlinMall\Provider\Provider.iml" filepath="D:\AndroidStudioWorkSpace\KotlinMall\Provider\Provider.iml" />
       <module fileurl="file://$PROJECT_DIR$/UserCenter/UserCenter.iml" filepath="$PROJECT_DIR$/UserCenter/UserCenter.iml" />
+      <module fileurl="file://D:\AndroidStudioWorkSpace\KotlinMall\UserCenter\UserCenter.iml" filepath="D:\AndroidStudioWorkSpace\KotlinMall\UserCenter\UserCenter.iml" />
     </modules>
   </component>
 </project>

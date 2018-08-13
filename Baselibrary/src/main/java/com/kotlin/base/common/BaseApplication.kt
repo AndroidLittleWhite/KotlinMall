@@ -13,7 +13,7 @@ import com.kotlin.base.injection.module.AppModule
 /**
  * @author Mr_YKing on 2018/7/18.
  */
-class BaseApplication:Application() {
+open class BaseApplication:Application() {
     lateinit var appComponent:AppComponent
 
     override fun onCreate() {
