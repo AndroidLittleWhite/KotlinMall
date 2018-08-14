@@ -14,6 +14,7 @@ import com.kotlin.goods.ui.fragment.CategoryFragment
 import com.kotlin.kotilinmall.R
 import com.kotlin.kotilinmall.ui.fragment.HomeFragment
 import com.kotlin.kotilinmall.ui.fragment.MeFragment
+import com.kotlin.message.ui.fragment.MessageFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
@@ -23,7 +24,7 @@ class MainActivity : AppCompatActivity() {
     private val mHomeFragment:HomeFragment by lazy { HomeFragment() }
     private val mCategoryFragment:CategoryFragment by lazy { CategoryFragment() }
     private val mCartFragment:CartFragment by lazy { CartFragment() }
-    private val mMsgFragment:HomeFragment by lazy { HomeFragment() }
+    private val mMsgFragment:MessageFragment by lazy { MessageFragment() }
     private val mMeFragment:MeFragment by lazy { MeFragment() }
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -2,11 +2,13 @@ package com.kotlin.usercenter.ui.activity
 
 import android.os.Bundle
 import android.view.View
+import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.kotlin.base.common.AppManager
 import com.kotlin.base.ext.enable
 import com.kotlin.base.ext.onClick
 import com.kotlin.base.ui.activity.BaseMvpActivity
+import com.kotlin.provider.router.PushProvider
 import com.kotlin.provider.router.RouterPath
 import com.kotlin.user.utils.UserPrefsUtils.putUserInfo
 import com.kotlin.usercenter.data.protocol.UserInfo
@@ -22,6 +24,9 @@ import org.jetbrains.anko.toast
 @Route(path = RouterPath.UserCenter.PATH_LOGIN)
 class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView, View.OnClickListener {
 
+    @Autowired(name = RouterPath.MessageCenter.PATH_MESSAGE_PUSH)
+    @JvmField
+    var mPushProvider:PushProvider?=null
 
     private var firstPress:Long =0
     override fun injectComponent() {
@@ -52,7 +57,7 @@ class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView, View.OnClick
         when(view.id){
             R.id.mRightTv->{ startActivity<RegisterActivity>()}
             R.id.mLoginBtn ->{
-                mPresenter.login(mMobileEt.text.toString(),mPwdEt.text.toString(),"")
+                mPresenter.login(mMobileEt.text.toString(),mPwdEt.text.toString(),mPushProvider?.getPushId()?:"")
             }
             R.id.mForgetPwdTv ->{
                 startActivity<ForgetPwdActivity>()

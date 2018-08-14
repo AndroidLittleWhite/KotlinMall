@@ -2,6 +2,7 @@ package com.kotlin.order.ui.activity
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.kotlin.base.ui.activity.BaseMvpActivity
 import com.kotlin.base.utils.YuanFenConverter
 import com.kotlin.order.R
@@ -12,11 +13,13 @@ import com.kotlin.order.presenter.OrderDetailPresenter
 import com.kotlin.order.presenter.view.OrderDetailView
 import com.kotlin.order.ui.adapter.OrderGoodsAdapter
 import com.kotlin.provider.common.ProviderConstant
+import com.kotlin.provider.router.RouterPath
 import kotlinx.android.synthetic.main.activity_order_detail.*
 
 /**
  * Created by  on 2018/8/6.YaoKai
  */
+@Route(path = RouterPath.MessageCenter.PATH_MESSAGE_ORDER)
 class OrderDetailActivity : BaseMvpActivity<OrderDetailPresenter>(), OrderDetailView {
 
     private lateinit var mAdapter: OrderGoodsAdapter
