@@ -3,7 +3,7 @@ package com.kotlin.message.provider
 import android.content.Context
 import cn.jpush.android.api.JPushInterface
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.kotlin.provider.router.PushProvider
+import com.kotlin.provider.PushProvider
 import com.kotlin.provider.router.RouterPath
 
 /**

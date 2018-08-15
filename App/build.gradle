@@ -39,10 +39,10 @@ dependencies {
         compile project(':UserCenter')
     }
     compile project(':Provider')
-    compile project(':MessageCenter')
     compile project(':GoodsCenter')
     compile project(':OrderCenter')
     compile project(':PaySDK')
+    compile project(':MessageCenter')
 }
 repositories {
     mavenCentral()

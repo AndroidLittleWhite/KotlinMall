@@ -1,4 +1,4 @@
-package com.kotlin.provider.router
+package com.kotlin.provider
 
 import com.alibaba.android.arouter.facade.template.IProvider
 

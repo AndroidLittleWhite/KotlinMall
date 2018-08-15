@@ -8,7 +8,7 @@ import com.kotlin.base.common.AppManager
 import com.kotlin.base.ext.enable
 import com.kotlin.base.ext.onClick
 import com.kotlin.base.ui.activity.BaseMvpActivity
-import com.kotlin.provider.router.PushProvider
+import com.kotlin.provider.PushProvider
 import com.kotlin.provider.router.RouterPath
 import com.kotlin.user.utils.UserPrefsUtils.putUserInfo
 import com.kotlin.usercenter.data.protocol.UserInfo
@@ -26,7 +26,7 @@ class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView, View.OnClick
 
     @Autowired(name = RouterPath.MessageCenter.PATH_MESSAGE_PUSH)
     @JvmField
-    var mPushProvider:PushProvider?=null
+    var mPushProvider: PushProvider? = null
 
     private var firstPress:Long =0
     override fun injectComponent() {
