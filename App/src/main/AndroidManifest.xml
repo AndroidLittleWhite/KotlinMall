@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.kotlin.kotilinmall">
+    package="com.kotlin.mall">
 
     <application
         android:allowBackup="true"
@@ -9,15 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name=".common.MainApplication">
-        <activity android:name=".ui.activity.MainActivity">
+        android:name="com.kotlin.mall.common.MainApplication">
+        <activity android:name="com.kotlin.mall.ui.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.SettingActivity"/>
+        <activity android:name="com.kotlin.mall.ui.activity.SettingActivity"/>
     </application>
 
 </manifest>

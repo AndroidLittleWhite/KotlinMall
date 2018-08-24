@@ -61,5 +61,6 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView, Vie
 
     override fun onRegisterSuccess(msg:String) {
         toast(msg)
+        finish()
     }
 }

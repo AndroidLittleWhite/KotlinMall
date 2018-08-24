@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.kotlin.base.common.AppManager
 import com.kotlin.base.ext.enable
 import com.kotlin.base.ext.onClick
 import com.kotlin.base.ui.activity.BaseMvpActivity
@@ -28,7 +27,6 @@ class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView, View.OnClick
     @JvmField
     var mPushProvider: PushProvider? = null
 
-    private var firstPress:Long =0
     override fun injectComponent() {
         DaggerUserComponet.builder().activityComponent(activityComponent).userModule(UserModule()).build().inject(this)
         mPresenter.mView = this
@@ -73,15 +71,5 @@ class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView, View.OnClick
         toast("登陆成功")
         putUserInfo(user)
        finish()
-    }
-
-    override fun onBackPressed() {
-        val currentTime=System.currentTimeMillis()
-        if (currentTime - firstPress > 2000) {
-            toast("再按一次退出程序")
-            firstPress=currentTime
-        }else{
-            AppManager.instance.exitApp(this)
-        }
     }
 }

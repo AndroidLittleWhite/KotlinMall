@@ -1,4 +1,4 @@
-package com.kotlin.kotilinmall;
+package com.kotlin.mall;
 
 import org.junit.Test;
 

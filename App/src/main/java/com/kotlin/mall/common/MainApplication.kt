@@ -1,4 +1,4 @@
-package com.kotlin.kotilinmall.common
+package com.kotlin.mall.common
 
 import cn.jpush.android.api.JPushInterface
 import com.kotlin.base.common.BaseApplication

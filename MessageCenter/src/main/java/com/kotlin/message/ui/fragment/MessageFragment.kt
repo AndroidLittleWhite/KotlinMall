@@ -5,6 +5,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.eightbitlab.rxbus.Bus
 import com.kennyc.view.MultiStateView
 import com.kotlin.base.ext.loading
 import com.kotlin.base.ui.fragment.BaseMvpFragment
@@ -15,6 +16,7 @@ import com.kotlin.message.presenter.MessagePresenter
 import com.kotlin.message.presenter.view.MessageView
 import com.kotlin.message.ui.adapter.MessageAdapter
 import com.kotlin.order.R
+import com.kotlin.provider.event.MessageBadgeEvent
 import kotlinx.android.synthetic.main.fragment_message.*
 
 /*
@@ -84,7 +86,7 @@ class MessageFragment:BaseMvpFragment<MessagePresenter>(),MessageView {
     override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)
         if (!hidden){
-//            Bus.send(MessageBadgeEvent(false))
+            Bus.send(MessageBadgeEvent(false))
         }
     }
 }

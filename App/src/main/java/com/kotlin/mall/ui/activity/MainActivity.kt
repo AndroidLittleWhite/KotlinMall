@@ -1,4 +1,4 @@
-package com.kotlin.kotilinmall.ui.activity
+package com.kotlin.mall.ui.activity
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -6,16 +6,19 @@ import android.support.v7.app.AppCompatActivity
 import com.ashokvarma.bottomnavigation.BottomNavigationBar
 import com.eightbitlab.rxbus.Bus
 import com.eightbitlab.rxbus.registerInBus
+import com.kotlin.base.common.AppManager
 import com.kotlin.base.utils.AppPrefsUtils
 import com.kotlin.goods.common.GoodsConstant
 import com.kotlin.goods.event.UpdateCartSizeEvent
 import com.kotlin.goods.ui.fragment.CartFragment
 import com.kotlin.goods.ui.fragment.CategoryFragment
-import com.kotlin.kotilinmall.R
-import com.kotlin.kotilinmall.ui.fragment.HomeFragment
-import com.kotlin.kotilinmall.ui.fragment.MeFragment
+import com.kotlin.mall.R
+import com.kotlin.mall.ui.fragment.HomeFragment
+import com.kotlin.mall.ui.fragment.MeFragment
 import com.kotlin.message.ui.fragment.MessageFragment
+import com.kotlin.provider.event.MessageBadgeEvent
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.toast
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -26,6 +29,8 @@ class MainActivity : AppCompatActivity() {
     private val mCartFragment:CartFragment by lazy { CartFragment() }
     private val mMsgFragment:MessageFragment by lazy { MessageFragment() }
     private val mMeFragment:MeFragment by lazy { MeFragment() }
+
+    private var firstPress:Long =0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,13 +94,29 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
                 .registerInBus(this)
-
+        Bus.observe<MessageBadgeEvent>()
+                .subscribe {
+                    t: MessageBadgeEvent ->
+                    run {
+                        mBottomNavBar.checkMsgBadge(t.isVisible)
+                    }
+                }
+                .registerInBus(this)
     }
 
     private fun loadCartSize() {
         mBottomNavBar.checkCartBadge(AppPrefsUtils.getInt(GoodsConstant.SP_CART_SIZE))
     }
 
+    override fun onBackPressed() {
+        val currentTime=System.currentTimeMillis()
+        if (currentTime - firstPress > 2000) {
+            toast("再按一次退出程序")
+            firstPress=currentTime
+        }else{
+            AppManager.instance.exitApp(this)
+        }
+    }
     override fun onDestroy() {
         super.onDestroy()
         Bus.unregister(this)
