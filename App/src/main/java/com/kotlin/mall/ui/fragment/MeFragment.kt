@@ -1,4 +1,4 @@
-package com.kotlin.kotilinmall.ui.fragment
+package com.kotlin.mall.ui.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,8 +8,8 @@ import com.kotlin.base.ext.loadUrl
 import com.kotlin.base.ext.onClick
 import com.kotlin.base.ui.fragment.BaseFragment
 import com.kotlin.base.utils.AppPrefsUtils
-import com.kotlin.kotilinmall.R
-import com.kotlin.kotilinmall.ui.activity.SettingActivity
+import com.kotlin.mall.R
+import com.kotlin.mall.ui.activity.SettingActivity
 import com.kotlin.order.common.OrderConstant
 import com.kotlin.order.common.OrderStatus
 import com.kotlin.order.ui.activity.OrderActivity
@@ -55,19 +55,29 @@ class MeFragment : BaseFragment() ,View.OnClickListener{
                 }
             }
             R.id.mAllOrderTv->{
-                startActivity<OrderActivity>(OrderConstant.KEY_ORDER_STATUS to OrderStatus.ORDER_ALL)
+                afterLogin {
+                    startActivity<OrderActivity>(OrderConstant.KEY_ORDER_STATUS to OrderStatus.ORDER_ALL)
+                }
             }
             R.id.mCompleteOrderTv->{
-                startActivity<OrderActivity>(OrderConstant.KEY_ORDER_STATUS to OrderStatus.ORDER_COMPLETED)
+                afterLogin {
+                    startActivity<OrderActivity>(OrderConstant.KEY_ORDER_STATUS to OrderStatus.ORDER_COMPLETED)
+                }
             }
             R.id.mWaitConfirmOrderTv->{
-                startActivity<OrderActivity>(OrderConstant.KEY_ORDER_STATUS to OrderStatus.ORDER_WAIT_CONFIRM)
+                afterLogin {
+                    startActivity<OrderActivity>(OrderConstant.KEY_ORDER_STATUS to OrderStatus.ORDER_WAIT_CONFIRM)
+                }
             }
             R.id.mWaitPayOrderTv->{
-                startActivity<OrderActivity>(OrderConstant.KEY_ORDER_STATUS to OrderStatus.ORDER_WAIT_PAY)
+                afterLogin {
+                    startActivity<OrderActivity>(OrderConstant.KEY_ORDER_STATUS to OrderStatus.ORDER_WAIT_PAY)
+                }
             }
             R.id.mAddressTv->{
-                startActivity<ShipAddressActivity>()
+                afterLogin {
+                    startActivity<ShipAddressActivity>()
+                }
             }
             R.id.mSettingTv->{
                 startActivity<SettingActivity>()

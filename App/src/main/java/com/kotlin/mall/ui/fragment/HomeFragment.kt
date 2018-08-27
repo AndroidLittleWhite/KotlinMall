@@ -1,4 +1,4 @@
-package com.kotlin.kotilinmall.ui.fragment
+package com.kotlin.mall.ui.fragment
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -10,7 +10,7 @@ import com.kotlin.base.ext.onClick
 import com.kotlin.base.ui.fragment.BaseFragment
 import com.kotlin.base.widgets.BannerImageLoader
 import com.kotlin.goods.ui.activity.SearchGoodsActivity
-import com.kotlin.kotilinmall.R
+import com.kotlin.mall.R
 import com.kotlin.mall.common.*
 import com.kotlin.mall.ui.adapter.HomeDiscountAdapter
 import com.kotlin.mall.ui.adapter.TopicAdapter
